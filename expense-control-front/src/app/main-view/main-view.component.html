@@ -1,0 +1,82 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-center">
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item active" role="presentation">
+            <a class="nav-link" id="current-m-tab" data-toggle="tab" href="#month" role="tab" aria-controls="month"
+                aria-selected="true">Mês Atual</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link" id="filter-tab" data-toggle="tab" href="#filter" role="tab" aria-controls="filter"
+                aria-selected="false">Filtrar</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link entradas" href="#">Entradas</a>
+        </li>
+    </ul>
+</nav>
+<div class="tab-content bg-dark" id="myTabContent">
+    <div class="tab-pane fade show active" id="month" role="tabpanel" aria-labelledby="current-m-tab">
+        <div class="container-fluid bg-dark vh-100 d-flex justify-content-center">
+            <div class="container row ">
+                <div class="col-8">
+                    <table class="table table-dark mt-4">
+                        <thead>
+                            <tr>
+                                <th scope="col">Name</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Date</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><input [(ngModel)]="newExpense.name" class="form-control bg-dark text-white" type="text" name="newExpense-name" id="newExpense-name"></td>
+                                <td><input [(ngModel)]="newExpense.price" class="form-control bg-dark text-white" type="text" name="newExpense-price" id="newExpense-price"></td>
+                                <td class="text-black-50">
+                                    <ngx-dates-picker [(ngModel)]="date" [options]="options"></ngx-dates-picker>
+                                <td><a (click)="saveExpense()" class="btn btn-dark">Salvar</a></td>
+                            </tr>
+                            <tr *ngFor="let expense of monthExpenseList">
+                                <td>{{expense.name}}</td>
+                                <td>{{expense.price}}</td>
+                                <td>{{expense.date}}</td>
+                                <td><a>Editar</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-4 coluna-lateral">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane fade show" id="filter" role="tabpanel" aria-labelledby="filter-tab">
+        <div class="container-fluid bg-dark vh-100 d-flex justify-content-center">
+            <div class="container row ">
+                <div class="col-8">
+                    <table class="table table-dark mt-4">
+                        <thead>
+                            <tr>
+                                <th scope="col">Name</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Date</th>
+                                <th scope="col"><a>Adicionar</a></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let expense of expenseList">
+                                <td>{{expense.name}}</td>
+                                <td>{{expense.price}}</td>
+                                <td>{{expense.date}}</td>
+                                <td><a>Editar</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-4 bg-light">
+                    <app-month-picker (monthRangeSelected)="filter($event)"></app-month-picker>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
